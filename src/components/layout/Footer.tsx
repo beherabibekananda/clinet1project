@@ -76,6 +76,7 @@ const Footer = () => {
                 "Physiotherapy",
                 "Special Education",
                 "Sensory Integration Therapy",
+                "Prosthetics & Orthotics",
               ].map((service) => (
                 <li key={service}>
                   <Link
@@ -109,8 +110,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <a href="mailto:support@tinytriumph.in" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  support@tinytriumph.in
+                <a href="mailto:gananjalika@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  gananjalika@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">

@@ -5,6 +5,9 @@ import { Sparkles, ChevronRight, CheckCircle2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { assets } from "@/lib/assets";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const Gallery = () => {
     const [visibleVideos, setVisibleVideos] = useState(3);
     const [visibleImages, setVisibleImages] = useState(6);
@@ -159,16 +162,15 @@ const Gallery = () => {
                                     transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
                                     className="group relative aspect-square overflow-hidden rounded-xl bg-card border border-border/40 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
                                 >
-                                    <img
+                                    <LazyLoadImage
                                         src={item}
                                         alt="Clinic Gallery"
-                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
+                                        effect="blur"
+                                        wrapperClassName="h-full w-full"
+                                        className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu ${!portraitIndices.has(index) ? 'rotate-90 scale-[1.5]' : ''}`}
                                         style={!portraitIndices.has(index) ? {
-                                            transform: 'rotate(90deg) scale(1.5)',
                                             transformOrigin: 'center center'
                                         } : undefined}
-                                        loading="lazy"
-                                        decoding="async"
                                     />
                                     {/* Hover text removed */}
                                 </motion.div>

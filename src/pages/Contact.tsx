@@ -27,6 +27,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { assets } from "@/lib/assets";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -86,9 +87,9 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "support@tinytriumph.in",
+      content: "gananjalika@gmail.com",
       detail: "Quick response guaranteed",
-      link: "mailto:support@tinytriumph.in",
+      link: "mailto:gananjalika@gmail.com",
     },
   ];
 
@@ -138,7 +139,7 @@ const Contact = () => {
           >
             <div className="relative z-10 w-full max-w-md lg:max-w-xl aspect-[4/5] lg:aspect-auto lg:h-[90%] overflow-hidden rounded-[2.5rem] md:rounded-[3rem] shadow-2xl border border-white/10">
               <img
-                src="/pediatric-specialist.webp"
+                src={assets.hero.specialist1}
                 alt="Our Pediatric Specialist"
                 className="w-full h-full object-cover"
                 loading="eager"

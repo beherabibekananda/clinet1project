@@ -6,6 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Target, Eye, Users, ChevronRight, CheckCircle2, Sparkles } from "lucide-react";
 import { assets } from "@/lib/assets";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const About = () => {
   const values = [
     {
@@ -117,11 +120,12 @@ const About = () => {
             className="relative lg:h-[70vh] flex items-center justify-center z-10"
           >
             <div className="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-lg aspect-[4/5] lg:aspect-auto lg:h-[90%] overflow-hidden rounded-[2.5rem] md:rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] border border-white/10 mt-4 lg:mt-0">
-              <img
+              <LazyLoadImage
                 src={assets.hero.specialist1}
                 alt="Our Lead Pediatric Specialist"
+                effect="blur"
+                wrapperClassName="w-full h-full"
                 className="w-full h-full object-cover object-top"
-                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a2a24] via-transparent to-transparent opacity-60" />
             </div>
@@ -143,11 +147,12 @@ const About = () => {
               className="relative order-2 lg:order-1"
             >
               <div className="relative z-10 w-full max-w-[420px] aspect-[3/4] mx-auto lg:mx-0 overflow-hidden rounded-[2rem] shadow-2xl border border-white/10 mb-12 lg:mb-0">
-                <img
+                <LazyLoadImage
                   src={assets.hero.specialist3}
                   alt="Tiny Triumph Specialists"
+                  effect="blur"
+                  wrapperClassName="w-full h-full"
                   className="w-full h-full object-cover object-center"
-                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a2a24]/40 via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
@@ -307,11 +312,12 @@ const About = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="aspect-square overflow-hidden">
-                  <img
+                  <LazyLoadImage
                     src={member.image}
                     alt={member.name}
+                    effect="blur"
+                    wrapperClassName="h-full w-full"
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
                   />
                 </div>
                 <CardContent className="p-6">

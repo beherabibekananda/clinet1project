@@ -14,6 +14,9 @@ import { motion } from "framer-motion";
 import { services } from "@/data/services";
 import { assets } from "@/lib/assets";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const Services = () => {
 
   return (
@@ -80,9 +83,11 @@ const Services = () => {
                   <div className="relative z-10 space-y-8">
                     {/* Service Banner Image */}
                     <div className="aspect-[16/10] w-full overflow-hidden rounded-3xl relative group-hover:shadow-2xl transition-all duration-500 mb-8">
-                      <img
+                      <LazyLoadImage
                         src={service.image}
                         alt={service.title}
+                        effect="blur"
+                        wrapperClassName="h-full w-full"
                         className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 ${service.needsRotation ? '-rotate-90 scale-[1.3]' : ''}`}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

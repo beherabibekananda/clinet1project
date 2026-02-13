@@ -25,6 +25,8 @@ import { useRef, useState, useEffect } from "react";
 import { assets } from "@/lib/assets";
 import Magnetic from "@/components/ui/Magnetic";
 import { RevealSection } from "@/components/ui/RevealSection";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -305,11 +307,11 @@ const Index = () => {
                   <div className="relative z-20 flex h-full flex-col">
                     {/* Banner Image */}
                     <div className="h-48 w-full overflow-hidden relative">
-                      <img
+                      <LazyLoadImage
                         src={service.image}
                         alt={service.title}
-                        loading="lazy"
-                        decoding="async"
+                        effect="blur"
+                        wrapperClassName="h-full w-full"
                         className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 transform-gpu ${service.needsRotation ? '-rotate-90 scale-[1.3]' : ''}`}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -690,6 +692,8 @@ const Index = () => {
                   type: "Event",
                   date: "Jan 7, 2026",
                   image: assets.gallery[7],
+                  rotate: "rotate-90",
+                  scale: "scale-[1.5]",
                   likes: "1.9K",
                   comments: "23",
                   url: "https://www.facebook.com/p/Tiny-Triumph-child-development-centre-61566975311848/"
@@ -725,17 +729,17 @@ const Index = () => {
                       <div className="flex flex-col">
                         <span className="text-sm font-bold text-foreground leading-tight">{post.username}</span>
                       </div>
-                      <Facebook className="h-5 w-5 text-blue-600 transition-transform group-hover:scale-110" />
+                      <Facebook className="h-5 w-5 text-blue-600 transition-transform group-hover:scale-95" />
                     </div>
 
                     {/* Card Image */}
                     <div className="aspect-square w-full overflow-hidden relative bg-secondary/5">
-                      <img
+                      <LazyLoadImage
                         src={post.image}
                         alt="Social post"
-                        className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""}`}
-                        loading="lazy"
-                        decoding="async"
+                        effect="blur"
+                        wrapperClassName="h-full w-full"
+                        className={`h-full w-full object-cover transition-transform duration-700 transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""} ${"rotate" in post ? "group-hover:scale-[1.45]" : "group-hover:scale-95"}`}
                       />
                     </div>
 
@@ -798,7 +802,7 @@ const Index = () => {
             {[
               { label: "Happy Families", value: "500+", icon: Heart, color: "text-red-500" },
               { label: "Successful Therapies", value: "10k+", icon: Award, color: "text-yellow-500" },
-              { label: "Experience", value: "15+ Yrs", icon: Clock, color: "text-blue-500" }
+              { label: "Experience", value: "5+ Yrs", icon: Clock, color: "text-blue-500" }
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
