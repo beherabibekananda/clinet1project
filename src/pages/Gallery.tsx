@@ -20,10 +20,10 @@ const Gallery = () => {
     const allVideos = [
         { id: 1, title: "Sensory Mastery", ...assets.videos.showcase1 },
         { id: 2, title: "Precision Motor Skills", ...assets.videos.showcase2 },
-        { id: 3, title: "Social Interaction", ...assets.videos.showcase3 },
+        { id: 3, title: "Developmental Therapy", ...assets.videos.showcase3 },
         { id: 4, title: "Therapeutic Play", ...assets.videos.showcase4 },
         { id: 5, title: "Developmental Milestones", ...assets.videos.showcase5 },
-        { id: 6, title: "Behavioral Progress", ...assets.videos.showcase6 },
+        { id: 6, title: "Developmental Milestone", ...assets.videos.showcase6 },
         { id: 7, title: "Motor Function", ...assets.videos.showcase7 },
         { id: 8, title: "Success Stories", ...assets.videos.showcase9 },
         { id: 9, title: "Clinical Excellence", ...assets.videos.showcase10 },

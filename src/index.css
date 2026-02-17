@@ -108,12 +108,13 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-size: 14px;
-    /* Brix Studio style: 14px body text */
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   section {

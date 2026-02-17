@@ -46,10 +46,10 @@ const Index = () => {
   const allVideos = [
     { id: 1, ...assets.videos.showcase1, title: "Sensory Mastery" },
     { id: 2, ...assets.videos.showcase2, title: "Precision Motor Skills" },
-    { id: 3, ...assets.videos.showcase3, title: "Social Interaction" },
+    { id: 3, ...assets.videos.showcase3, title: "Developmental Therapy" },
     { id: 4, ...assets.videos.showcase4, title: "Therapeutic Play" },
     { id: 5, ...assets.videos.showcase5, title: "Developmental Milestones" },
-    { id: 6, ...assets.videos.showcase6, title: "Behavioral Progress" },
+    { id: 6, ...assets.videos.showcase6, title: "Developmental Milestone" },
     { id: 7, ...assets.videos.showcase7, title: "Motor Function" },
     { id: 8, ...assets.videos.showcase9, title: "Success Stories" },
     { id: 9, ...assets.videos.showcase10, title: "Clinical Excellence" },
