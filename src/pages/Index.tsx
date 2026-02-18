@@ -28,6 +28,66 @@ import { RevealSection } from "@/components/ui/RevealSection";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
+const VideoCard = ({ item, idx }: { item: any, idx: number }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isInView) {
+      videoRef.current.play().catch(() => { });
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+      transition={{ duration: 0.5, delay: idx % 3 * 0.1 }}
+      className="group relative h-[400px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl border border-white/10"
+    >
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        poster={item.poster}
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
+      >
+        <source src={item.webm} type="video/webm" />
+        <source src={item.mp4} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+      <div className="absolute bottom-10 left-10 transition-transform duration-500 group-hover:-translate-y-2">
+        <h3 className="text-2xl font-bold text-white drop-shadow-lg">{item.title}</h3>
+        <div className="mt-2 h-1 w-12 bg-primary rounded-full group-hover:w-full transition-all duration-500" />
+      </div>
+    </motion.div>
+  );
+};
+
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -476,45 +536,7 @@ const Index = () => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <AnimatePresence mode="popLayout">
               {allVideos.slice(0, visibleVideos).map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                  transition={{ duration: 0.5, delay: idx % 3 * 0.1 }}
-                  className="group relative h-[400px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl border border-white/10"
-                >
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={item.poster}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
-                    onMouseEnter={(e) => {
-                      const playPromise = e.currentTarget.play();
-                      if (playPromise !== undefined) {
-                        playPromise.catch(() => {
-                          // Auto-play was prevented
-                        });
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      // We keep it playing even when mouse leaves if it's autoplay
-                      // but if the user wants it to pause on leave, we can keep the pause.
-                      // Actually, for autoplay videos, usually they keep playing.
-                      // Let's remove the pause on leave to keep the section "living".
-                    }}
-                  >
-                    <source src={item.webm} type="video/webm" />
-                    <source src={item.mp4} type="video/mp4" />
-                  </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                  <div className="absolute bottom-10 left-10 transition-transform duration-500 group-hover:-translate-y-2">
-                    <h3 className="text-2xl font-bold text-white drop-shadow-lg">{item.title}</h3>
-                    <div className="mt-2 h-1 w-12 bg-primary rounded-full group-hover:w-full transition-all duration-500" />
-                  </div>
-                </motion.div>
+                <VideoCard key={item.id} item={item} idx={idx} />
               ))}
             </AnimatePresence>
           </div>

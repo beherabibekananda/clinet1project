@@ -4,16 +4,20 @@ import "lenis/dist/lenis.css";
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
+        // Only initialize Lenis on desktop/large screens to prevent lag on mobile
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        if (isMobile) return;
+
         const lenis = new Lenis({
-            duration: 1.5, // Increased for dreamier, smoother feel
+            duration: 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
             wheelMultiplier: 1.0,
-            touchMultiplier: 1.8, // More responsive on touch devices
+            touchMultiplier: 1.8,
             infinite: false,
-            lerp: 0.05, // Lower lerp = smoother transition (more fluid)
+            lerp: 0.05,
         });
 
         function raf(time: number) {
