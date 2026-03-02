@@ -243,35 +243,34 @@ const Index = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
         <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+          {/* Static first banner for instant LCP */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${banners[0]}')` }}
+          />
           <AnimatePresence initial={false}>
-            <motion.div
-              key={currentBanner}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                opacity: { duration: 2, ease: "easeInOut" },
-                scale: { duration: 10, ease: "linear" }
-              }}
-              style={{ y: y1 }}
-              className="absolute inset-0"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url('${banners[currentBanner]}')` }}
-              />
-              <div className="absolute inset-0 bg-black/40" />
-            </motion.div>
+            {currentBanner > 0 && (
+              <motion.div
+                key={currentBanner}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ opacity: { duration: 2, ease: "easeInOut" } }}
+                className="absolute inset-0"
+              >
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url('${banners[currentBanner]}')` }}
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-4xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+            <div>
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white drop-shadow-2xl leading-[1.1]">
                 <span className="text-hero-gradient">Nurturing Little Triumphs</span>
               </h1>
@@ -279,21 +278,21 @@ const Index = () => {
                 A premier child development centre in Balasore dedicated to unlocking your child's full potential through
                 <span className="text-white font-medium"> compassionate care</span> and <span className="text-white font-medium">expert therapy</span>.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+            <div
               className="mt-10 md:mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
             >
               <Magnetic>
-                <button className="w-full sm:w-auto rounded-full bg-[#5ec2b4] px-8 py-4 text-base md:px-12 md:py-6 md:text-xl font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#4ea89c] flex items-center justify-center group">
-                  <a href="https://api.whatsapp.com/send?phone=919114222044&text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Tiny%20Triumph%20CDC." target="_blank" rel="noopener noreferrer" className="flex items-center">
-                    Book Appointment
-                    <ChevronRight className="ml-2 h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </button>
+                <a
+                  href="https://api.whatsapp.com/send?phone=919114222044&text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Tiny%20Triumph%20CDC."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto rounded-full bg-[#5ec2b4] px-8 py-4 text-base md:px-12 md:py-6 md:text-xl font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#4ea89c] flex items-center justify-center group"
+                >
+                  Book Appointment
+                  <ChevronRight className="ml-2 h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:translate-x-1" />
+                </a>
               </Magnetic>
               <Magnetic>
                 <Link
@@ -303,7 +302,7 @@ const Index = () => {
                   Our Specialities
                 </Link>
               </Magnetic>
-            </motion.div>
+            </div>
           </div>
         </div>
 

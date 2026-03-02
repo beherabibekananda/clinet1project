@@ -3,39 +3,55 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- DNS Prefetch & Preconnect for Google Fonts -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts - Non-blocking load -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" media="print"
     onload="this.media='all'">
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   </noscript>
 
-  <!-- Critical Preloads -->
-  <link rel="preload" as="image" href="/assets/hero/reception.webp" type="image/webp">
-  <link rel="preload" as="image" href="/assets/hero/specialist-1.webp" type="image/webp">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- Preload LCP hero image for instant paint -->
+  <link rel="preload" as="image" href="/hp-banner.webp" type="image/webp" fetchpriority="high">
+
   <title>Tiny Triumph - Child Development Centre</title>
   <meta name="description"
-    content="Tiny Triumph is a trusted centre in Balasore dedicated to nurturing your child’s growth, development, and confidence." />
+    content="Tiny Triumph is a trusted centre in Balasore dedicated to nurturing your child's growth, development, and confidence." />
   <meta name="author" content="Tiny Triumph" />
 
   <meta property="og:title" content="Tiny Triumph - Child Development Centre" />
-  <meta property="og:description" content="Nurturing your child’s growth, development, and confidence in Balasore." />
+  <meta property="og:description" content="Nurturing your child's growth, development, and confidence in Balasore." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.webp" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@TinyTriumph" />
   <meta name="twitter:image" content="/og-image.webp" />
+
+  <!-- Critical CSS for above-the-fold content to prevent FOUC -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    #root {
+      min-height: 100vh;
+    }
+  </style>
 </head>
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.tsx" defer></script>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>

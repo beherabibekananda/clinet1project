@@ -37,11 +37,10 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-framer': ['framer-motion'],
-          'vendor-lucide': ['lucide-react'],
+          'vendor-ui': ['lucide-react', '@radix-ui/react-tooltip', '@radix-ui/react-toast'],
         },
       },
     },
     chunkSizeWarningLimit: 1000,
   },
 }));
-
