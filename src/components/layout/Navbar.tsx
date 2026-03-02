@@ -55,13 +55,13 @@ const Navbar = () => {
       initial="visible"
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border/40 bg-white/95 dark:bg-background/95 backdrop-blur-md shadow-md"
+      className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border/40 bg-white/95 dark:bg-background/95 backdrop-blur-md shadow-md" style={{ minHeight: '64px' }}
     >
       <div className="container flex h-16 items-center justify-between lg:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-10 lg:h-12 items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105">
-            <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" />
+            <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" width="120" height="48" />
           </div>
         </Link>
 

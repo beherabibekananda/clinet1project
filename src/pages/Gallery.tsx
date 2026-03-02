@@ -39,7 +39,7 @@ const Gallery = () => {
     return (
         <Layout>
             {/* 1. Splendid Split-Screen Hero */}
-            <section className="relative min-h-[85vh] flex items-center bg-[#0a2a24] overflow-hidden pt-[160px] pb-[80px]">
+            <section className="relative flex items-center bg-[#0a2a24] overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
                 {/* Faded Background Image */}
                 <div
                     className="absolute inset-0 z-0 opacity-20"
@@ -164,8 +164,10 @@ const Gallery = () => {
                                 >
                                     <LazyLoadImage
                                         src={item}
-                                        alt="Clinic Gallery"
+                                        alt={`Tiny Triumph Clinic Gallery Image ${index + 1}`}
                                         effect="blur"
+                                        width={400}
+                                        height={400}
                                         wrapperClassName="h-full w-full"
                                         className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu ${!portraitIndices.has(index) ? 'rotate-90 scale-[1.5]' : ''}`}
                                         style={!portraitIndices.has(index) ? {

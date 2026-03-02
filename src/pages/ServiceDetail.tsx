@@ -39,7 +39,7 @@ const ServiceDetail = () => {
         <Layout>
             <div ref={containerRef} className="relative min-h-screen bg-background">
                 {/* 1. Boutique Hero Section */}
-                <section className={`relative min-h-[85vh] flex items-center pt-[160px] pb-[80px] overflow-hidden`}>
+                <section className={`relative flex items-center pt-[160px] pb-[80px] overflow-hidden`} style={{ minHeight: '85vh' }}>
                     {/* Background Image with Overlay */}
                     <motion.div
                         initial={{

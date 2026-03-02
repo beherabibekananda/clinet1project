@@ -77,7 +77,7 @@ const About = () => {
   return (
     <Layout>
       {/* 1. Splendid Split-Screen Hero */}
-      <section className="relative min-h-[85vh] flex items-center bg-[#0a2a24] dark:bg-background overflow-hidden pt-[140px] md:pt-[180px] lg:pt-[160px] pb-[80px]">
+      <section className="relative flex items-center bg-[#0a2a24] dark:bg-background overflow-hidden pt-[140px] md:pt-[180px] lg:pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
         {/* Faded Background Image */}
         <div
           className="absolute inset-0 z-0 opacity-20"
@@ -124,6 +124,8 @@ const About = () => {
                 src={assets.hero.specialist1}
                 alt="Our Lead Pediatric Specialist"
                 effect="blur"
+                width={500}
+                height={625}
                 wrapperClassName="w-full h-full"
                 className="w-full h-full object-cover object-top"
               />
@@ -151,6 +153,8 @@ const About = () => {
                   src={assets.hero.specialist3}
                   alt="Tiny Triumph Specialists"
                   effect="blur"
+                  width={420}
+                  height={560}
                   wrapperClassName="w-full h-full"
                   className="w-full h-full object-cover object-center"
                 />
@@ -215,7 +219,7 @@ const About = () => {
               className="relative group p-12 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden"
             >
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.05]">
-                <img src={assets.logos.main} alt="" className="w-1/2 h-1/2 object-contain" />
+                <img src={assets.logos.main} alt="" className="w-1/2 h-1/2 object-contain" width="200" height="200" />
               </div>
               <div className="absolute top-0 right-0 p-8 text-primary/20 pointer-events-none">
                 <Target className="h-32 w-32" />
@@ -238,7 +242,7 @@ const About = () => {
               className="relative group p-12 rounded-[3rem] bg-white/5 border border-accent/10 backdrop-blur-xl overflow-hidden"
             >
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.05]">
-                <img src={assets.logos.main} alt="" className="w-1/2 h-1/2 object-contain" />
+                <img src={assets.logos.main} alt="" className="w-1/2 h-1/2 object-contain" width="200" height="200" />
               </div>
               <div className="absolute top-0 right-0 p-8 text-accent/20 pointer-events-none">
                 <Eye className="h-32 w-32" />
@@ -316,6 +320,8 @@ const About = () => {
                     src={member.image}
                     alt={member.name}
                     effect="blur"
+                    width={400}
+                    height={400}
                     wrapperClassName="h-full w-full"
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />

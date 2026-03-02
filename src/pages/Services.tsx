@@ -22,7 +22,7 @@ const Services = () => {
   return (
     <Layout>
       {/* 1. Theatrical Hero Section */}
-      <section className="relative min-h-[75vh] flex items-center overflow-hidden pt-[160px] pb-[80px]">
+      <section className="relative flex items-center overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '75vh' }}>
         {/* Background Image with Overlay */}
         <motion.div
           initial={{ scale: 1.1 }}
@@ -87,6 +87,8 @@ const Services = () => {
                         src={service.image}
                         alt={service.title}
                         effect="blur"
+                        width={400}
+                        height={250}
                         wrapperClassName="h-full w-full"
                         className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 ${service.needsRotation ? '-rotate-90 scale-[1.3]' : ''}`}
                       />
@@ -151,7 +153,7 @@ const Services = () => {
               <div className="aspect-square rounded-[4rem] bg-card shadow-2xl p-12 flex flex-col justify-center text-center relative overflow-hidden">
                 {/* Faded Background Logo */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
-                  <img src={assets.logos.main} alt="" className="w-2/3 h-2/3 object-contain" />
+                  <img src={assets.logos.main} alt="" className="w-2/3 h-2/3 object-contain" width="200" height="200" />
                 </div>
                 <Quote className="h-20 w-20 text-primary/20 mx-auto mb-10 relative z-10" />
                 <h3 className="font-display text-2xl italic font-medium text-light-gradient dark:text-dark-gradient mb-8 relative z-10">

@@ -96,7 +96,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* 1. Split-Screen Theatrical Hero */}
-      <section className="relative min-h-[85vh] flex items-center bg-[#0a1a1f] overflow-hidden pt-[160px] pb-[80px]">
+      <section className="relative flex items-center bg-[#0a1a1f] overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
         <div className="container relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-2 items-center px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -143,6 +143,8 @@ const Contact = () => {
                 alt="Our Pediatric Specialist"
                 className="w-full h-full object-cover"
                 loading="eager"
+                width="500"
+                height="625"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a1f] via-transparent to-transparent opacity-40" />
             </div>

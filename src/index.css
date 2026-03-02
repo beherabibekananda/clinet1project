@@ -117,6 +117,22 @@
     overflow-x: hidden;
   }
 
+  /* CLS Prevention: Reserve space for images/videos */
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* CLS Prevention: Font swap fallback */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: local('Inter');
+  }
+
   section {
     content-visibility: auto;
     contain-intrinsic-size: 1px 500px;

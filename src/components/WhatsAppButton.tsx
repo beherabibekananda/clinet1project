@@ -12,7 +12,7 @@ export const WhatsAppButton = () => {
       className="flex h-16 w-16 items-center justify-center transition-transform hover:scale-110 focus:outline-none"
       aria-label="Chat on WhatsApp"
     >
-      <img src="/whatsapp.webp" alt="WhatsApp" className="h-full w-full object-contain drop-shadow-lg" />
+      <img src="/whatsapp.webp" alt="Chat on WhatsApp" className="h-full w-full object-contain drop-shadow-lg" width="64" height="64" />
     </a>
   );
 };

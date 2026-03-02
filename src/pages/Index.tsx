@@ -241,7 +241,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[85vh] md:min-h-[90vh] flex items-center overflow-hidden pt-[160px] pb-[80px]">
+      <section ref={heroRef} className="relative flex items-center overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
         <div className="absolute inset-0 z-0 overflow-hidden bg-black">
           <AnimatePresence initial={false}>
             <motion.div
@@ -371,6 +371,8 @@ const Index = () => {
                         src={service.image}
                         alt={service.title}
                         effect="blur"
+                        width={400}
+                        height={192}
                         wrapperClassName="h-full w-full"
                         className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 transform-gpu ${service.needsRotation ? '-rotate-90 scale-[1.3]' : ''}`}
                       />
@@ -488,6 +490,8 @@ const Index = () => {
                   className="absolute inset-0 w-full h-full object-cover transform-gpu"
                   loading="lazy"
                   decoding="async"
+                  width="600"
+                  height="600"
                 />
               </div>
               <motion.div
@@ -758,8 +762,10 @@ const Index = () => {
                     <div className="aspect-square w-full overflow-hidden relative bg-secondary/5">
                       <LazyLoadImage
                         src={post.image}
-                        alt="Social post"
+                        alt={`${post.type} - ${post.content.substring(0, 50)}`}
                         effect="blur"
+                        width={320}
+                        height={320}
                         wrapperClassName="h-full w-full"
                         className={`h-full w-full object-cover transition-transform duration-700 transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""} ${"rotate" in post ? "group-hover:scale-[1.45]" : "group-hover:scale-95"}`}
                       />

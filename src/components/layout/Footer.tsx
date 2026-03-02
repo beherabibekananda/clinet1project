@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
               <div className="flex h-12 items-center justify-center overflow-hidden">
-                <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" />
+                <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" width="120" height="48" />
               </div>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
