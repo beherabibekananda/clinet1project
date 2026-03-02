@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS-only banner fade — no JS overhead, fully composited */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
 @layer base {
   :root {
     /* Soft Teal & Green Medical Palette */

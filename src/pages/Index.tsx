@@ -61,11 +61,7 @@ const VideoCard = ({ item, idx }: { item: any, idx: number }) => {
   }, [isInView]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9, y: 20 }}
-      transition={{ duration: 0.5, delay: idx % 3 * 0.1 }}
+    <div
       className="group relative h-[400px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl border border-white/10"
     >
       <video
@@ -84,16 +80,12 @@ const VideoCard = ({ item, idx }: { item: any, idx: number }) => {
         <h3 className="text-2xl font-bold text-white drop-shadow-lg">{item.title}</h3>
         <div className="mt-2 h-1 w-12 bg-primary rounded-full group-hover:w-full transition-all duration-500" />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
 
   const [currentBanner, setCurrentBanner] = useState(0);
   const [visibleVideos, setVisibleVideos] = useState(3);
@@ -159,9 +151,7 @@ const Index = () => {
     }
   };
 
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  // Parallax removed for mobile performance
 
   const features = [
     {
@@ -243,28 +233,26 @@ const Index = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative flex items-center overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
         <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-          {/* Static first banner for instant LCP */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${banners[0]}')` }}
+          {/* Real <img> for instant LCP discovery — browsers can preload this from HTML */}
+          <img
+            src={banners[0]}
+            alt="Tiny Triumph Child Development Centre"
+            width={1200}
+            height={676}
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <AnimatePresence initial={false}>
-            {currentBanner > 0 && (
-              <motion.div
-                key={currentBanner}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ opacity: { duration: 2, ease: "easeInOut" } }}
-                className="absolute inset-0"
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url('${banners[currentBanner]}')` }}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {currentBanner > 0 && (
+            <img
+              key={currentBanner}
+              src={banners[currentBanner]}
+              alt="Tiny Triumph Centre"
+              width={1200}
+              height={676}
+              className="absolute inset-0 w-full h-full object-cover animate-fade-in"
+            />
+          )}
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
@@ -306,14 +294,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Floating elements for visual interest */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block">
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-12 rounded-full bg-gradient-to-b from-white/20 to-transparent"
-          />
-        </div>
       </section>
 
       {/* Services Section */}
@@ -332,18 +312,8 @@ const Index = () => {
 
           <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={service.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15
-                }}
-                viewport={{ once: true, margin: "-100px" }}
               >
                 <Link
                   to={`/services/${service.slug}`}
@@ -408,7 +378,7 @@ const Index = () => {
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
 
