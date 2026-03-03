@@ -74,7 +74,7 @@ const VideoCard = ({ item, idx }: { item: any, idx: number }) => {
         poster={item.poster}
         width={400}
         height={400}
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
+        className="h-full w-full object-cover transform-gpu"
       >
         <source src={item.webm} type="video/webm" />
         <source src={item.mp4} type="video/mp4" />
@@ -744,10 +744,10 @@ const Index = () => {
                 ].map((post) => (
                   <motion.div
                     key={post.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: post.id * 0.1 }}
+                    transition={{ duration: 0.8, delay: post.id * 0.1 }}
                     className="flex-shrink-0 w-[280px] sm:w-[320px] snap-center group"
                   >
                     <a
@@ -773,7 +773,7 @@ const Index = () => {
                           width={320}
                           height={320}
                           wrapperClassName="h-full w-full"
-                          className={`h-full w-full object-cover transition-transform duration-700 transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""} ${"rotate" in post ? "group-hover:scale-[1.45]" : "group-hover:scale-95"}`}
+                          className={`h-full w-full object-cover transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""}`}
                         />
                       </div>
 

@@ -91,11 +91,11 @@ const Gallery = () => {
                             {allVideos.slice(0, visibleVideos).map((video, idx) => (
                                 <motion.div
                                     key={video.id}
-                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                    transition={{ duration: 0.5, delay: idx % 3 * 0.1 }}
-                                    className="group relative aspect-square overflow-hidden rounded-xl bg-card shadow-sm border border-border/40 transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: idx % 3 * 0.1 }}
+                                    className="group relative aspect-square overflow-hidden rounded-xl bg-card shadow-sm border border-border/40 transition-all duration-500 hover:shadow-xl"
                                 >
                                     <video
                                         autoPlay
@@ -103,7 +103,7 @@ const Gallery = () => {
                                         loop
                                         playsInline
                                         poster={video.poster}
-                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
+                                        className="h-full w-full object-cover transform-gpu"
                                         onMouseEnter={(e) => {
                                             const playPromise = e.currentTarget.play();
                                             if (playPromise !== undefined) {
@@ -156,11 +156,11 @@ const Gallery = () => {
                             {galleryItems.slice(0, visibleImages).map((item, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                    transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                                    className="group relative aspect-square overflow-hidden rounded-xl bg-card border border-border/40 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
+                                    className="group relative aspect-square overflow-hidden rounded-xl bg-card border border-border/40 shadow-sm transition-all duration-500 hover:shadow-xl"
                                 >
                                     <LazyLoadImage
                                         src={item}
@@ -169,7 +169,7 @@ const Gallery = () => {
                                         width={400}
                                         height={400}
                                         wrapperClassName="h-full w-full"
-                                        className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu ${!portraitIndices.has(index) ? 'rotate-90 scale-[1.5]' : ''}`}
+                                        className={`h-full w-full object-cover transform-gpu ${!portraitIndices.has(index) ? 'rotate-90 scale-[1.5]' : ''}`}
                                         style={!portraitIndices.has(index) ? {
                                             transformOrigin: 'center center'
                                         } : undefined}
