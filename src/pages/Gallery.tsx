@@ -151,7 +151,7 @@ const Gallery = () => {
 
             <section className="py-16 bg-secondary/5">
                 <div className="container">
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
                         <AnimatePresence mode="popLayout">
                             {galleryItems.slice(0, visibleImages).map((item, index) => (
                                 <motion.div
@@ -162,13 +162,10 @@ const Gallery = () => {
                                     transition={{ duration: 0.8, delay: (index % 3) * 0.1 }}
                                     className="group relative aspect-square overflow-hidden rounded-xl bg-card border border-border/40 shadow-sm transition-all duration-500 hover:shadow-xl"
                                 >
-                                    <LazyLoadImage
+                                    <img
                                         src={item}
                                         alt={`Tiny Triumph Clinic Gallery Image ${index + 1}`}
-                                        effect="blur"
-                                        width={400}
-                                        height={400}
-                                        wrapperClassName="h-full w-full"
+                                        loading="lazy"
                                         className={`h-full w-full object-cover transform-gpu ${!portraitIndices.has(index) ? 'rotate-90 scale-[1.5]' : ''}`}
                                         style={!portraitIndices.has(index) ? {
                                             transformOrigin: 'center center'

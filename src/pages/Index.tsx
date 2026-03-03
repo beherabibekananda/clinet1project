@@ -371,13 +371,10 @@ const Index = () => {
                     <div className="relative z-20 flex h-full flex-col">
                       {/* Banner Image */}
                       <div className="h-48 w-full overflow-hidden relative">
-                        <LazyLoadImage
+                        <img
                           src={service.image}
                           alt={service.title}
-                          effect="blur"
-                          width={400}
-                          height={192}
-                          wrapperClassName="h-full w-full"
+                          loading="lazy"
                           className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 transform-gpu ${service.needsRotation ? '-rotate-90 scale-[1.3]' : ''}`}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -766,13 +763,10 @@ const Index = () => {
 
                       {/* Card Image */}
                       <div className="aspect-square w-full overflow-hidden relative bg-secondary/5">
-                        <LazyLoadImage
+                        <img
                           src={post.image}
                           alt={`${post.type} - ${post.content.substring(0, 50)}`}
-                          effect="blur"
-                          width={320}
-                          height={320}
-                          wrapperClassName="h-full w-full"
+                          loading="lazy"
                           className={`h-full w-full object-cover transform-gpu ${"rotate" in post ? post.rotate : ""} ${"scale" in post ? post.scale : ""}`}
                         />
                       </div>
