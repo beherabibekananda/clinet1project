@@ -12,11 +12,11 @@ const EntranceGate = ({ onComplete, mode = "full" }: EntranceGateProps) => {
 
     useEffect(() => {
         // Timeline adjustments based on mode - optimized for speed
-        let peakDelay = 800;
-        let logoDelay = 1200;
-        let threadDelay = 1400;
-        let revealDelay = 1800;
-        let completeDelay = 3400;
+        let peakDelay = 600;
+        let logoDelay = 1000;
+        let threadDelay = 1200;
+        let revealDelay = 1500;
+        let completeDelay = 2600;
 
         if (mode === "minimal") {
             peakDelay = 50;

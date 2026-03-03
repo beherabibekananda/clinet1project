@@ -1,16 +1,21 @@
 import { ReactNode, memo } from "react";
+import { motion } from "framer-motion";
 
 interface RevealSectionProps {
     children: ReactNode;
     delay?: number;
 }
 
-export const RevealSection = memo(({ children }: RevealSectionProps) => {
-    // Render content immediately — no animation to avoid CLS
+export const RevealSection = memo(({ children, delay = 0.1 }: RevealSectionProps) => {
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay, ease: "easeOut" }}
+        >
             {children}
-        </div>
+        </motion.div>
     );
 });
 
