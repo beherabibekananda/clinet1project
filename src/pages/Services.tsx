@@ -111,7 +111,7 @@ const Services = () => {
 
                     <div className="pt-6 flex items-center gap-3 text-primary font-bold transition-all duration-300 group-hover:gap-4">
                       <span className="text-xs uppercase tracking-[0.2em]">Learn More</span>
-                      <ArrowRight className="h-5 w-5" />
+                      <ChevronRight className="h-5 w-5" />
                     </div>
                   </div>
                 </Link>
