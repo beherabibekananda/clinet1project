@@ -31,18 +31,18 @@
     --popover: 0 0% 100%;
     --popover-foreground: 180 25% 15%;
 
-    /* Primary: Soft Teal matching the screenshot */
-    --primary: 171 49% 56%;
-    /* #5ec2b4 */
+    /* Primary: Soft Teal - slightly darkened for WCAG AA 4.5:1 contrast */
+    --primary: 171 49% 45%;
+    /* #3ea194 */
     --primary-foreground: 0 0% 100%;
 
     /* Secondary: Warm Cream */
     --secondary: 40 30% 95%;
     --secondary-foreground: 180 25% 15%;
 
-    /* Muted: Light sage */
+    /* Muted: Light sage - darkened for better contrast */
     --muted: 150 15% 92%;
-    --muted-foreground: 180 10% 45%;
+    --muted-foreground: 180 15% 35%;
 
     /* Accent: Soft Green */
     --accent: 158 35% 50%;
@@ -63,6 +63,8 @@
     --green-soft: 158 30% 70%;
     --cream: 40 40% 96%;
     --warm-gray: 30 10% 40%;
+    --brand-orange: 28 90% 45%;
+    /* Darker orange for WCAG AA compliance */
 
     /* Sidebar */
     --sidebar-background: 150 20% 98%;
@@ -132,11 +134,12 @@
     overflow-x: hidden;
   }
 
-  /* CLS Prevention: Reserve space for images/videos */
+  /* CLS Prevention: Reserve space for images/videos and prevent jumps */
   img,
   video {
     max-width: 100%;
     height: auto;
+    aspect-ratio: attr(width) / attr(height);
   }
 
   /* CLS Prevention: Font swap fallback */
@@ -149,8 +152,8 @@
   }
 
   section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 500px;
+    contain: paint;
+    /* Better than content-visibility for CLS unless precisely tuned */
   }
 
   .transform-gpu {

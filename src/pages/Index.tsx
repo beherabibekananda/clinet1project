@@ -69,7 +69,10 @@ const VideoCard = ({ item, idx }: { item: any, idx: number }) => {
         muted
         loop
         playsInline
+        preload="none"
         poster={item.poster}
+        width={400}
+        height={400}
         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 transform-gpu"
       >
         <source src={item.webm} type="video/webm" />
@@ -109,6 +112,13 @@ const Index = () => {
     { id: 11, ...assets.videos.showcase12, title: "Empowering Journeys" },
     { id: 12, ...assets.videos.showcase13, title: "Developmental Play" },
   ];
+
+  // Predictive pre-caching of next banner
+  useEffect(() => {
+    const nextIdx = (currentBanner + 1) % banners.length;
+    const img = new Image();
+    img.src = banners[nextIdx];
+  }, [currentBanner, banners]);
 
   const [testimonialProgress, setTestimonialProgress] = useState(0);
   const [socialProgress, setSocialProgress] = useState(0);
@@ -231,9 +241,9 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative flex items-center overflow-hidden pt-[160px] pb-[80px]" style={{ minHeight: '100vh' }}>
+      <section ref={heroRef} className="relative flex items-center overflow-hidden pt-[120px] pb-[60px]" style={{ minHeight: '100dvh' }}>
         <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-          {/* Real <img> for instant LCP discovery — browsers can preload this from HTML */}
+          {/* Static first banner for instant LCP discovery and rendering (no JS delay) */}
           <img
             src={banners[0]}
             alt="Tiny Triumph Child Development Centre"
@@ -241,16 +251,21 @@ const Index = () => {
             height={676}
             fetchPriority="high"
             decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${currentBanner === 0 ? 'opacity-100' : 'opacity-0'}`}
           />
+
+          {/* Transition banners for subsequent slides */}
           {currentBanner > 0 && (
-            <img
+            <motion.img
               key={currentBanner}
               src={banners[currentBanner]}
               alt="Tiny Triumph Centre"
               width={1200}
               height={676}
-              className="absolute inset-0 w-full h-full object-cover animate-fade-in"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
           )}
           <div className="absolute inset-0 bg-black/40" />
@@ -258,7 +273,7 @@ const Index = () => {
 
         <div className="container relative z-10 px-4 md:px-6">
           <div className="mx-auto max-w-4xl text-center">
-            <div>
+            <div className="min-h-[120px] md:min-h-[160px]">
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white drop-shadow-2xl leading-[1.1]">
                 <span className="text-hero-gradient">Nurturing Little Triumphs</span>
               </h1>
@@ -276,7 +291,7 @@ const Index = () => {
                   href="https://api.whatsapp.com/send?phone=919114222044&text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20Tiny%20Triumph%20CDC."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto rounded-full bg-[#5ec2b4] px-8 py-4 text-base md:px-12 md:py-6 md:text-xl font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#4ea89c] flex items-center justify-center group"
+                  className="w-full sm:w-auto rounded-full bg-primary px-8 py-4 text-base md:px-12 md:py-6 md:text-xl font-medium text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-primary/90 flex items-center justify-center group"
                 >
                   Book Appointment
                   <ChevronRight className="ml-2 h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:translate-x-1" />
@@ -603,9 +618,9 @@ const Index = () => {
           <div className="mt-12 flex flex-col items-center gap-8">
             <div className="w-full max-w-[300px] h-1 bg-primary/10 rounded-full overflow-hidden relative">
               <motion.div
-                className="absolute top-0 left-0 h-full bg-primary"
-                initial={{ width: "0%" }}
-                animate={{ width: `${testimonialProgress}%` }}
+                className="absolute top-0 left-0 h-full bg-primary w-full origin-left"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: testimonialProgress / 100 }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
               />
             </div>
@@ -613,12 +628,14 @@ const Index = () => {
               <button
                 onClick={() => scrollTestimonials('left')}
                 className="h-12 w-12 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:bg-secondary/20 hover:text-primary transition-all duration-300 active:scale-95 shrink-0"
+                aria-label="Previous testimonials"
               >
                 <ChevronRight className="h-6 w-6 rotate-180" />
               </button>
               <button
                 onClick={() => scrollTestimonials('right')}
                 className="h-12 w-12 rounded-xl border border-[#f48120] bg-[#f48120]/5 flex items-center justify-center text-[#f48120] hover:bg-[#f48120] hover:text-white transition-all duration-300 active:scale-95 shadow-sm shrink-0"
+                aria-label="Next testimonials"
               >
                 <ChevronRight className="h-6 w-6" />
               </button>
@@ -632,7 +649,7 @@ const Index = () => {
         <div className="container relative">
           {/* Section Header Badge */}
           <div className="absolute -top-6 left-8 z-20">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#f48120] px-6 py-2 shadow-lg transition-transform hover:scale-105">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[hsl(var(--brand-orange))] px-6 py-2 shadow-lg transition-transform hover:scale-105">
               <MessageCircle className="h-5 w-5 text-white fill-white" />
               <span className="text-sm font-bold uppercase tracking-wider text-white"># Social Footprints</span>
             </div>
@@ -767,9 +784,9 @@ const Index = () => {
             <div className="mt-12 flex flex-col items-center gap-6">
               <div className="w-full max-w-[240px] h-1 bg-[#f48120]/10 rounded-full overflow-hidden relative">
                 <motion.div
-                  className="absolute top-0 left-0 h-full bg-[#f48120]"
-                  initial={{ width: "0%" }}
-                  animate={{ width: `${socialProgress}%` }}
+                  className="absolute top-0 left-0 h-full bg-[hsl(var(--brand-orange))] w-full origin-left"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: socialProgress / 100 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 />
               </div>
@@ -777,12 +794,14 @@ const Index = () => {
                 <button
                   onClick={() => scrollFeed('left')}
                   className="h-10 w-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:bg-secondary/20 hover:text-primary transition-all duration-300 active:scale-90 shrink-0"
+                  aria-label="Scroll social feed left"
                 >
                   <ChevronRight className="h-5 w-5 rotate-180" />
                 </button>
                 <button
                   onClick={() => scrollFeed('right')}
-                  className="h-10 w-10 rounded-lg border border-[#f48120] bg-[#f48120]/5 flex items-center justify-center text-[#f48120] hover:bg-[#f48120] hover:text-white transition-all duration-300 active:scale-90 shadow-sm shrink-0"
+                  className="h-10 w-10 rounded-lg border border-[hsl(var(--brand-orange))] bg-[hsl(var(--brand-orange))]/5 flex items-center justify-center text-[hsl(var(--brand-orange))] hover:bg-[hsl(var(--brand-orange))] hover:text-white transition-all duration-300 active:scale-90 shadow-sm shrink-0"
+                  aria-label="Scroll social feed right"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>

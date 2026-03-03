@@ -61,7 +61,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-10 lg:h-12 items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105">
-            <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" width="120" height="48" />
+            <img src={assets.logos.main} alt="Tiny Triumph Logo" className="h-full w-auto object-contain" width="120" height="48" loading="eager" decoding="async" />
           </div>
         </Link>
 
