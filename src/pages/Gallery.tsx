@@ -10,7 +10,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Gallery = () => {
     const [visibleVideos, setVisibleVideos] = useState(3);
-    const [visibleImages, setVisibleImages] = useState(6);
+    const [visibleImages, setVisibleImages] = useState(9);
 
     // Portrait images (no rotation needed):
     // 0 = specialist photo, 1 = clinic-1, 9 = clinic-9, 17 = clinic-21, 19 = clinic-24, 23 = clinic-34, 24 = clinic-37, 25 = clinic-39, 26 = clinic-40, 27 = clinic-41, 28 = clinic-43
@@ -151,7 +151,7 @@ const Gallery = () => {
 
             <section className="py-16 bg-secondary/5">
                 <div className="container">
-                    <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+                    <div className="grid grid-cols-2 gap-6 lg:grid-cols-3">
                         <AnimatePresence mode="popLayout">
                             {galleryItems.slice(0, visibleImages).map((item, index) => (
                                 <motion.div
